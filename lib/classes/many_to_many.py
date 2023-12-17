@@ -1,6 +1,9 @@
 class NationalPark:
+    all = []
+
     def __init__(self, name):
         self.name = name
+        type(self).all.append(self)
 
     @property
     def name(self):
@@ -31,6 +34,17 @@ class NationalPark:
                 times = visited
 
         return best
+
+    @classmethod
+    def most_visited(cls):
+        visits = 0
+        most = None
+        for national_park in cls.all:
+            park_visits = national_park.total_visits()
+            if park_visits > visits:
+                visits = park_visits
+                most = national_park
+        return most
 
 
 class Trip:
